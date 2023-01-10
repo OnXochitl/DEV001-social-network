@@ -3,34 +3,43 @@
 // import { myFunction } from './lib/index.js';
 
 // myFunction();
-//import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, createUser } from './firebase.js';
-import { Register } from './componentes/registro.js';
+
+import { Profile } from './Components/Profile/profileIndex.js';
+import { Register } from './Components/Register/registerIndex.js';
+import { Login } from './Components/Login/loginIndex.js';
+import { Wall } from './Components/Wall/wallIndex.js';
+import { Home } from './Components/Home/home.js';
 
 const rootDiv = document.getElementById('root');
 
-const routes = {
-  '/src/': Register,
+let routes = {};
+
+export const onNavigate = (pathname) => {
+  window.history.pushState(
+    {},
+    pathname,
+    window.location.origin + pathname,
+  );
+  while (rootDiv.firstChild) {
+    rootDiv.removeChild(rootDiv.firstChild);
+  }
+  rootDiv.appendChild(routes[pathname]);
 };
 
-const componente = routes[window.location.pathname];
+routes = {
+  '/': Home(onNavigate),
+  '/register': Register(onNavigate),
+  '/profile': Profile(onNavigate),
+  '/login': Login(onNavigate),
+  '/wall': Wall(onNavigate),
+};
+
+const componente = () => routes[window.location.pathname];
 rootDiv.appendChild(componente());
 
-const registroButton = document.getElementById('home');
-console.log(registroButton);
-
-registroButton.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const email = registroButton.correoInput.value;
-  const contraseña = registroButton['contraseñaInput'].value;
-  console.log(registroButton);
-  console.log(email, contraseña);
-
-  /*.then {
-    const userCredentials = await createUser(auth, email, contraseña);
-    console.log(userCredentials);
-  } catch (error) {
-    console.log(error);
-  }*/
-});
+window.onpopstate = () => {
+  while (rootDiv.firstChild) {
+    rootDiv.removeChild(rootDiv.firstChild);
+  }
+  rootDiv.appendChild(componente());
+};

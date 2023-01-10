@@ -1,0 +1,400 @@
+body {
+  background-color: #FFE521;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+}
+
+#home input {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px 0;
+  height: 25px;
+  padding-left: 6px;
+  font-size: 18px;
+}
+
+#home input::placeholder {
+  font-size: 18px;
+}
+
+
+#home,
+.registerFinish,
+.formWall,
+.savePosts,
+.homeButtons {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.155);
+  border-radius: 15px;
+  background-color: #F5F5F5;
+  width: 70%;
+  margin: auto;
+}
+
+.imageHomeGif {
+  margin: 0 15vw;
+  width: 70%;
+  padding-bottom: 3vh;
+}
+
+#home div,
+.homeDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+#register h1,
+#title {
+  font-size: 48px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 10px;
+}
+
+#register p,
+.registerProfile p,
+.messageP, #login p {
+  text-align: center;
+  font-size: 20px;
+  margin: 0 33px 20px 33px;
+}
+
+.registerProfile p {
+  font-weight: bold;
+}
+
+#home button,
+.registerProfile button,
+.buttonSubmitPost,
+.buttonLogin,
+.buttonRegister {
+  background-color: black;
+  color: #F5F5F5;
+  border-radius: 10px;
+  height: 49px;
+  margin: 8px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.registerLab{
+  display: none;
+    }
+
+#home label,
+.registerProfile label {
+  margin: 8px 0 5px 0;
+  font-size: 18px;
+}
+
+button img {
+  width: 30px;
+  float: left;
+  margin-left: 10px;
+}
+
+.inputForm.check {
+  background-color: rgba(104, 203, 104, 0.682);
+}
+
+.inputForm.wrong {
+  background-color: rgba(227, 106, 106, 0.735);
+}
+
+.error {
+  display: none;
+  font-size: small;
+  margin: 0;
+}
+
+.error.activo {
+  display: block;
+}
+
+.errorUserExist.activo {
+  display: block;
+  color: rgba(223, 26, 26, 0.933);
+}
+
+.errorUserExist {
+  display: none;
+}
+
+.imagenMayor {
+  width: 35px;
+}
+
+.registerProfile input,
+.registerProfile textarea,
+.post {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px 0;
+  height: 25px;
+  padding-left: 6px;
+  font-size: 18px;
+}
+
+.userPlace {
+  display: flex;
+  justify-content: end;
+  padding-right: 4vw;
+}
+
+.userPlace h3 {
+  font-size: 20px;
+}
+
+.imageGif {
+  display: block;
+  margin: auto;
+  padding-bottom: 20px;
+}
+
+.textStart {
+  text-align: center;
+  font-weight: 400;
+  font-size: 115%;
+  margin: 10px 10%;
+}
+
+.formWall p {
+  font-weight: 400;
+  font-size: 120%;
+  margin-bottom: 8px;
+}
+
+.registerProfile textarea {
+  height: 100px;
+}
+
+.post {
+  height: 150px;
+}
+
+.savePosts {
+  margin-top: 20px;
+}
+
+.savePosts p {
+  font-size: 18px;
+}
+
+.containerImageAndUserPosts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerImageAndUserPosts h3 {
+  font-size: 22px;
+}
+
+.allPublications {
+  font-size: 23px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.savePosts img {
+  width: 45px;
+}
+
+.imageLikePosts {
+  display: block;
+  margin-left: auto;
+}
+
+.containerImage img {
+  width: 120px;
+}
+
+.inputImage {
+  width: 100px;
+}
+
+.containerImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#logo {
+  font-size: 40px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+#title, #title2 {
+  font-size: 40px;
+  justify-content: center;
+  padding: 0;
+}
+
+#logo .closeSesion {
+  font-size: 15px;
+  padding-right: 4vw;
+  cursor: pointer;
+}
+
+.showPosts {
+  background-color: #FFE521;
+}
+
+#imageEye,
+#imageEye2 {
+  width: 25px;
+  position: absolute;
+  display: block;
+  bottom: 1.2vh;
+  right: 1vh;
+}
+
+.divAccount {
+  margin-top: 15px;
+}
+
+.divPassword,
+.divPassword2 {
+  position: relative;
+}
+
+.login,
+.register {
+  text-decoration: underline;
+  cursor: pointer;
+  color: rgb(1, 1, 249);
+  margin: 0px;
+  text-align: center;
+}
+
+.haveAccount,
+.notHaveAccount {
+  margin: 0px;
+  text-align: center;
+}
+
+.editPostDiv {
+  display: none;
+}
+
+.editPostDiv.show {
+  display: block;
+}
+
+.editPostDiv.show textarea {
+  font-size: 20px;
+  border-radius: 5px;
+  height: 60px;
+  width: 95%;
+}
+
+.editPostDiv.show button {
+  background-color: black;
+  color: #F5F5F5;
+  border-radius: 5px;
+  background-color: black;
+  margin: 8px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+.containerImagePosts {
+  display: none;
+}
+
+.containerImagePosts.show {
+  display: block;
+}
+
+.likeDiv {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+@media (min-width: 1000px) {
+
+  #logo {
+    font-size: 4vw;
+  }
+
+  .userPlace h3, #register p, #login p{
+    font-size: 1.8vw;
+  }
+
+  .imagenMayor {
+    width: 4vw;
+  }
+
+  #logo .closeSesion {
+    font-size: 20px;
+  }
+
+  .textStart,
+  .messageP {
+    font-size: 1.8vw;
+  }
+
+  .messageP {
+    justify-content: center;
+    margin: 3vh 0 5vh 0;
+  }
+
+  .containerGifAndButtons {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .imageGif,
+  .imageHomeGif {
+    width: 40vw;
+  }
+
+  .imageHomeGif {
+    margin-left: 8vw;
+    margin-right: 0;
+  }
+
+  .homeButtons {
+    width: 30%;
+    margin-right: 10vw;
+  }
+
+  #title, #register h1 {
+    font-size: 4vw;
+    justify-content: center;
+  }
+
+  #home {
+    width: 30%;
+    justify-content: center;
+
+  }
+}
+
+  @media (min-width: 1300px) {
+
+    .containerImageAndRegister, .containerImageAndLogin {
+      display: flex;
+      margin-top: 4vh;
+    }
+
+    #register h1 {
+      font-size: 4vw;
+      justify-content: center;
+    }
+
+    .registerLab, .loginLab {
+      display: block;
+      width: 52%;
+      margin-left: 8vw;
+    }
+
+    #home {
+      width: 26%;
+      margin-right: 8vw;
+    }
+  }
