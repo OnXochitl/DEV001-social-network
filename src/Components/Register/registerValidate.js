@@ -11,7 +11,7 @@ const fields = {
   passwordInput: false,
 };
 
-const validateField = (expression, input, field, messageId) => {
+export const validateField = (expression, input, field, messageId) => {
   if (expression.test(input)) {
     document.getElementById(`${field}`).classList.add('check');
     document.getElementById(`${field}`).classList.remove('wrong');
@@ -25,7 +25,7 @@ const validateField = (expression, input, field, messageId) => {
   }
 };
 
-const validateEquals = (input, input2, messageId) => {
+export const validateEquals = (input, input2, messageId) => {
   const inputVer1 = document.getElementById(`${input}`);
   const inputVer2 = document.getElementById(`${input2}`);
   if (inputVer1.value === inputVer2.value) {
@@ -41,7 +41,7 @@ const validateEquals = (input, input2, messageId) => {
   }
 };
 
-const validateFirst = (input, input2) => {
+export const validateFirst = (input, input2) => {
   const inputVer1 = document.getElementById(`${input}`);
   const inputVer2 = document.getElementById(`${input2}`);
   if (inputVer1.value === inputVer2.value) {

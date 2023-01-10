@@ -1,5 +1,3 @@
-import { logOut } from '../../firebase';
-
 export const Profile = (onNavigate) => {
   const registerProfile = document.createElement('div');
   registerProfile.className = 'registerProfile';
@@ -74,7 +72,6 @@ export const Profile = (onNavigate) => {
   registerProfile.appendChild(registerFinish);
 
   buttonWall.addEventListener('click', () => {
-    logOut();
     localStorage.clear();
     onNavigate('/');
   });

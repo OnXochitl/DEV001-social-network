@@ -14,7 +14,7 @@ export const Home = (onNavigate) => {
   containerGifAndButtons.setAttribute('class', 'containerGifAndButtons');
 
   const imageHomeGif = document.createElement('img');
-  imageHomeGif.src = '../Image/emocion.gif';
+  imageHomeGif.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/emocion.gif';
   imageHomeGif.setAttribute('class', 'imageHomeGif');
 
   const homeButtons = document.createElement('div');

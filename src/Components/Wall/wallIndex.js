@@ -1,6 +1,6 @@
 import {
-  newPostCollection, user, onGetPosts, onGetUsers, getUserLog, logOut, deletePost, updatePost,
-  updateLikePost, disLikePost, order,
+  newPostCollection, onGetPosts, logOut, deletePost, updatePost,
+  updateLikePost, disLikePost,
 } from '../../firebase';
 
 export const Wall = (onNavigate) => {
@@ -18,13 +18,13 @@ export const Wall = (onNavigate) => {
   const userPlace = document.createElement('div');
   userPlace.className = 'userPlace';
   const imageGreaterThan = document.createElement('img');
-  imageGreaterThan.src = '../Image/mayorque.png';
+  imageGreaterThan.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/mayorque.png';
   imageGreaterThan.className = 'imagenMayor';
 
   const nameUser = document.createElement('h3');
 
   const imageLessThan = document.createElement('img');
-  imageLessThan.src = '../Image/menorque.png';
+  imageLessThan.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/menorque.png';
   imageLessThan.className = 'imagenMayor';
 
   const textStart = document.createElement('p');
@@ -33,12 +33,13 @@ export const Wall = (onNavigate) => {
 
   const imageGif = document.createElement('img');
   imageGif.className = 'imageGif';
-  imageGif.src = '../Image/celebrar.gif';
+  imageGif.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/celebrar.gif';
 
   const formWall = document.createElement('form');
   formWall.className = 'formWall';
 
   const createPost = document.createElement('p');
+  createPost.setAttribute('class', 'createPost');
   createPost.innerText = 'Crea una publicación';
 
   const post = document.createElement('textarea');
@@ -74,48 +75,24 @@ export const Wall = (onNavigate) => {
   wallDiv.appendChild(allPublications);
   wallDiv.appendChild(showPosts);
 
-  user();
   const usersUid = localStorage.getItem('uidUsuario');
-  console.log(usersUid);
-  console.log(localStorage);
-  onGetUsers((users) => {
-    users.forEach((userss) => {
-      if (userss.data().id === usersUid) {
-        getUserLog(usersUid).then((user1) => {
-          localStorage.setItem('userName', user1.data().user);
-          nameUser.innerText = user1.data().user;
-          console.log(user1.data());
-          return user1.data();
-        });
-      }
-    });
-  });
+  const displayName = localStorage.getItem('displayName');
+  nameUser.innerText = displayName;
 
   buttonSubmitPost.addEventListener('click', async (e) => {
     e.preventDefault();
     if (post.value !== '') {
-      newPostCollection(post.value, localStorage.getItem('userName'), usersUid);
+      newPostCollection(post.value, localStorage.getItem('displayName'), usersUid);
     }
   });
 
   onGetPosts((querySnapshot) => {
-    order();
-    console.log(order());
-    console.log(querySnapshot);
     post.value = '';
     showPosts.innerHTML = '';
     querySnapshot.forEach((doc) => {
-      console.log(order(doc.data()));
       const likesArray = doc.data().likes;
       const posts = doc.data();
-      console.log(posts);
       const userName = doc.data().name;
-      console.log(doc.data().post);
-      console.log(doc.data().dateCreated);
-      console.log(doc.data().likes);
-      console.log(doc.data().name);
-      console.log(doc.data().uid);
-      console.log(doc.id);
       const uidUser = doc.data().uid;
       const postId = doc.id;
       const savePosts = document.createElement('div');
@@ -129,9 +106,11 @@ export const Wall = (onNavigate) => {
       const containerImagePosts = document.createElement('div');
       containerImagePosts.className = 'containerImagePosts';
       const imageEditPosts = document.createElement('img');
-      imageEditPosts.src = '../Image/edit.png';
+      imageEditPosts.setAttribute('class', 'imageEditPosts');
+      imageEditPosts.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/edit.png';
       const imageDeletePosts = document.createElement('img');
-      imageDeletePosts.src = '../Image/trash.png';
+      imageDeletePosts.setAttribute('class', 'imageDeletePosts');
+      imageDeletePosts.src = 'https://i.postimg.cc/3J45fJmY/trash.png';
 
       const messagePosts = document.createElement('p');
       messagePosts.innerText = posts.post;
@@ -149,7 +128,7 @@ export const Wall = (onNavigate) => {
 
       const imageLikePosts = document.createElement('img');
       imageLikePosts.className = 'imageLikePosts';
-      imageLikePosts.src = likesArray.includes(usersUid) ? '../Image/Greenhearth.png' : '../Image/hearth.png';
+      imageLikePosts.src = likesArray.includes(usersUid) ? 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/greenHearth.png' : 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/hearth.png';
       imageLikePosts.setAttribute('id', 'imageLikePosts');
 
       const counterLikesPost = document.createElement('p');
@@ -179,8 +158,6 @@ export const Wall = (onNavigate) => {
         editPostDiv.classList.add('show');
       });
 
-      // let counterLikes = 0;
-
       imageLikePosts.addEventListener('click', () => {
         if (likesArray.includes(usersUid)) {
           disLikePost(postId, usersUid)
@@ -188,28 +165,24 @@ export const Wall = (onNavigate) => {
               console.log('Quitamos tu like');
             })
             .catch((error) => console.log(error));
-          imageLikePosts.src = '../Image/hearth.png';
+          imageLikePosts.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/hearth.png';
         } else {
           updateLikePost(postId, usersUid)
             .then(() => {
               console.log('Apareció tu Like');
             })
             .catch((error) => console.log(error));
-          imageLikePosts.src = '../Image/greenHearth.png';
+          imageLikePosts.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/greenHearth.png';
         }
       });
 
       buttonEditPost.addEventListener('click', () => {
-        console.log(doc.data().post);
-        console.log(editPost.value);
-        console.log(postId);
         updatePost(postId, editPost.value)
           .then(() => console.log('tu post fue Editado'))
           .catch((error) => console.log(error));
       });
 
       imageDeletePosts.addEventListener('click', () => {
-        console.log(postId);
         if (window.confirm('¿Quieres borrar este post?')) {
           deletePost(postId)
             .then((user2) => {
@@ -225,7 +198,7 @@ export const Wall = (onNavigate) => {
   closeSesion.addEventListener('click', () => {
     logOut();
     localStorage.clear();
-    onNavigate('/');
+    onNavigate('/DEV001-social-network/');
   });
 
   return wallDiv;

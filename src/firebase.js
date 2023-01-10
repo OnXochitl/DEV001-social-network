@@ -2,11 +2,11 @@
 import { initializeApp } from 'firebase/app';
 import {
   getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword,
-  GoogleAuthProvider, signInWithPopup,
+  GoogleAuthProvider, signInWithPopup, updateProfile,
 } from 'firebase/auth';
 import {
   getFirestore, addDoc, collection, doc, setDoc, onSnapshot, getDoc, deleteDoc, updateDoc,
-  arrayUnion, arrayRemove, serverTimestamp, query, orderBy, limit,
+  arrayUnion, arrayRemove, serverTimestamp, query, orderBy,
 } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -36,6 +36,8 @@ export const user = () => {
     if (us) {
       localStorage.setItem('uidUsuario', us.uid);
       localStorage.setItem('emailUser', us.email);
+      localStorage.setItem('displayName', us.displayName);
+      console.log(us.displayName);
       console.log('state = definitely signed in');
     } else {
       // User is signed out.
@@ -43,6 +45,10 @@ export const user = () => {
     }
   });
 };
+
+export const profileUpdate = (displayName) => updateProfile(auth.currentUser, {
+  displayName,
+});
 
 // eslint-disable-next-line arrow-body-style
 export const loginEmailAndPassword = (email, password) => {
@@ -80,9 +86,13 @@ export const newPostCollection = (post, name, uid) => {
   });
 };
 
+const collectionFirebase = collection(database, 'posts');
+
+export const order = () => query(collectionFirebase, orderBy('dateCreated', 'desc'));
+
 export const onGetUsers = (callback) => onSnapshot(collection(database, 'users'), callback);
 
-export const onGetPosts = (callback) => onSnapshot(collection(database, 'posts'), callback);
+export const onGetPosts = (callback) => onSnapshot(order(), callback);
 
 export const getUserLog = (uid) => getDoc(doc(database, 'users', uid));
 
@@ -99,10 +109,6 @@ export const updateLikePost = (uid, counterLikes) => updateDoc(doc(database, 'po
 export const disLikePost = (uid, counterLikes) => updateDoc(doc(database, 'posts', uid), {
   likes: arrayRemove(counterLikes),
 });
-
-const collectionFirebase = collection(database, 'posts');
-
-export const order = () => query(collectionFirebase, orderBy('dateCreated', 'desc'), limit(3));
 
 // export const catchData = getDocs(collection(database, 'users'));
 // catchData.forEach((doc) => {

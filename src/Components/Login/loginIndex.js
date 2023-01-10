@@ -1,4 +1,4 @@
-import { loginEmailAndPassword, googleRegister } from '../../firebase';
+import { loginEmailAndPassword, googleRegister, user } from '../../firebase';
 
 export const Login = (onNavigate) => {
   const login = document.createElement('section');
@@ -18,7 +18,7 @@ export const Login = (onNavigate) => {
   containerImageAndLogin.setAttribute('class', 'containerImageAndLogin');
 
   const imageLogin = document.createElement('img');
-  imageLogin.src = '../Image/loginLab.jpeg';
+  imageLogin.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/loginLab.jpeg';
   imageLogin.setAttribute('class', 'registerLab');
 
   const emailDiv = document.createElement('div');
@@ -49,7 +49,7 @@ export const Login = (onNavigate) => {
   passwordInput.setAttribute('name', 'password1');
 
   const imageEye = document.createElement('img');
-  imageEye.src = '../Image/eye-solid.svg';
+  imageEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-solid.svg';
   imageEye.setAttribute('id', 'imageEye');
 
   const buttonRegister = document.createElement('button');
@@ -109,9 +109,12 @@ export const Login = (onNavigate) => {
 
     // TODO: antes de llamar a registerClick, deben validar los inputs
     loginEmailAndPassword(emailInput.value, passwordInput.value)
-      .then((userCrendentials) => {
-        console.log(userCrendentials.user);
+      .then(() => {
+        // console.log(userCrendentials.user);
         onNavigate('/wall');
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
+        user();
       })
       .catch((error) => {
         // Handle Errors here.
@@ -132,20 +135,19 @@ export const Login = (onNavigate) => {
   });
 
   imageEye.addEventListener('click', () => {
-    const passwordType = document.getElementById('passwordInput');
-    const imageOpenEye = document.getElementById('imageEye');
-    if (passwordType.type === 'password') {
-      passwordType.type = 'text';
-      imageOpenEye.src = '../Image/eye-slash-solid.svg';
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      imageEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-slash-solid.svg';
     } else {
-      passwordType.type = 'password';
-      imageOpenEye.src = '../Image/eye-solid.svg';
+      passwordInput.type = 'password';
+      imageEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-solid.svg';
     }
   });
 
   buttonGoogle.addEventListener('click', () => {
     googleRegister();
     onNavigate('/wall');
+    user();
   });
 
   // console.log(inputs);

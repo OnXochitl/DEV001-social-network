@@ -1,5 +1,5 @@
 import {
-  googleRegister, newUserCollection, registerEmailAndPassword, onGetUsers,
+  googleRegister, newUserCollection, registerEmailAndPassword, onGetUsers, profileUpdate,
 } from '../../firebase';
 import { validate } from './registerValidate';
 // eslint-disable-next-line import/no-cycle
@@ -22,12 +22,12 @@ export const Register = (onNavigate) => {
   containerImageAndRegister.setAttribute('class', 'containerImageAndRegister');
 
   const imageRegister = document.createElement('img');
-  imageRegister.src = '../Image/registerLab.jpeg';
+  imageRegister.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/Registro/src/Image/registerLab.jpeg';
   imageRegister.setAttribute('class', 'registerLab');
 
   const userDiv = document.createElement('div');
-  const user = document.createElement('label');
-  user.innerText = 'Usuario';
+  const userLabel = document.createElement('label');
+  userLabel.innerText = 'Usuario';
 
   const userInput = document.createElement('input');
   userInput.setAttribute('name', 'user');
@@ -108,11 +108,11 @@ export const Register = (onNavigate) => {
   errorPassword2.setAttribute('id', 'message-error-password-2');
 
   const imageEye = document.createElement('img');
-  imageEye.src = '../Image/eye-solid.svg';
+  imageEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-solid.svg';
   imageEye.setAttribute('id', 'imageEye');
 
   const imageEye2 = document.createElement('img');
-  imageEye2.src = '../Image/eye-solid.svg';
+  imageEye2.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-solid.svg';
   imageEye2.setAttribute('id', 'imageEye2');
 
   const buttonRegister = document.createElement('button');
@@ -122,7 +122,7 @@ export const Register = (onNavigate) => {
   const buttonGoogle = document.createElement('button');
   const image = document.createElement('img');
   image.src = 'https://andigarcia.com/wp-content/uploads/2020/04/Google-Logo-Fondo-negro.jpg';
-  buttonGoogle.innerText = 'Ingresa con Google';
+  buttonGoogle.innerText = 'Regístro con Google';
   buttonGoogle.setAttribute('id', 'buttonGoogle');
 
   const divAccount = document.createElement('div');
@@ -142,7 +142,7 @@ export const Register = (onNavigate) => {
   // });
   buttonGoogle.appendChild(image);
 
-  userDiv.appendChild(user);
+  userDiv.appendChild(userLabel);
   userDiv.appendChild(userInput);
   userDiv.appendChild(errorUser);
   userDiv.appendChild(errorUserExist);
@@ -216,11 +216,11 @@ export const Register = (onNavigate) => {
 
     registerEmailAndPassword(emailInput.value, passwordInput.value)
       .then((UserCredential) => {
-        console.log(UserCredential.user.uid);
+        // console.log(UserCredential.user.uid);
         const userID = UserCredential.user.uid;
         onNavigate('/login');
+        profileUpdate(userInput.value);
         newUserCollection(userID, userInput.value, emailInput.value, passwordInput.value);
-        console.log(UserCredential.User);
       });
     /*
     .then(() => onNavigate('/login'));
@@ -234,14 +234,12 @@ export const Register = (onNavigate) => {
   });
 
   imageEye.addEventListener('click', () => {
-    const passwordType = document.getElementById('passwordInput');
-    const imageOpenEye = document.getElementById('imageEye');
-    if (passwordType.type === 'password') {
-      passwordType.type = 'text';
-      imageOpenEye.src = '../Image/eye-slash-solid.svg';
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      imageEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-slash-solid.svg';
     } else {
-      passwordType.type = 'password';
-      imageOpenEye.src = '../Image/eye-solid.svg';
+      passwordInput.type = 'password';
+      imageEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-solid.svg';
     }
   });
 
@@ -250,20 +248,19 @@ export const Register = (onNavigate) => {
     const imageOpenEye = document.getElementById('imageEye2');
     if (passwordType2.type === 'password') {
       passwordType2.type = 'text';
-      imageOpenEye.src = '../Image/eye-slash-solid.svg';
+      imageOpenEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-slash-solid.svg';
     } else {
       passwordType2.type = 'password';
-      imageOpenEye.src = '../Image/eye-solid.svg';
+      imageOpenEye.src = 'https://raw.githubusercontent.com/nicole11robayo/DEV001-social-network/f9e942c5134b8cd076df1f39b134d9690aa35c11/src/Image/eye-solid.svg';
     }
   });
 
   buttonGoogle.addEventListener('click', () => {
+    // const uidUsuario = localStorage.getItem('uidUsuario');
+    // const emailUser = localStorage.getItem('emailUser');
+    // const displayName = localStorage.getItem('displayName');
+    googleRegister();
     onNavigate('/login');
-    googleRegister()
-      .then((credenciales) => {
-        console.log(credenciales);
-      })
-      .catch((error) => console.log(error));
   });
 
   // console.log(inputs);
